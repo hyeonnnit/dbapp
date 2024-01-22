@@ -5,33 +5,29 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-
 public class BankDAOTest {
     @Test
     public void deleteByNumber_test(){
-        // given
-        int number = 1;
-        // when
+        int number = 5;
         BankDAO dao = new BankDAO();
         int result = dao.deleteByNumber(number);
-        // then
-        if (result == 1){
-            System.out.println("삭제 성공");
+        if (result==1){
+            System.out.println("delete success");
         }else if (result==0){
-            System.out.println(number + "번호를 찾을 수 없습니다.");
+            System.out.println(number+"is unknown");
         }else {
-            System.out.println("삭제 실패");
+            System.out.println("delete fail");
         }
     }
     @Test
     public void insert_test(){
-        String password = "4567";
-        int balance = 3800;
+        String password = "0000";
+        int balance = 4500;
         BankDAO dao = new BankDAO();
-        int result = dao.insert(password, balance);
-        if (result == 1){
-            System.out.println("insert access");
-        }else if (result==0){
+        int result = dao.insert(password,balance);
+        if (result==1){
+            System.out.println("insert success");
+        } else if (result==0) {
             System.out.println("insert unknown");
         }else {
             System.out.println("insert fail");
@@ -39,31 +35,27 @@ public class BankDAOTest {
     }
     @Test
     public void updateByNumber_test(){
-        int balance = 4000;
-        int number = 2;
+        int balance = 8000;
+        int number = 7;
         BankDAO dao = new BankDAO();
-        int result = dao.updateByNumber(balance, number);
-        if (result == 1){
+        int result = dao.updateByNumber(balance,number);
+        if (result==1){
             System.out.println("update success");
         }else if (result==0){
-            System.out.println("update fail");
+            System.out.println(number+"is unknown");
         }else {
-            System.out.println("not update");
+            System.out.println("update fail");
         }
     }
     @Test
-    public void selectByNumber(){
-        int number = 4;
+    public void selectByNumber_test(){
+        int number = 7;
         BankDAO dao = new BankDAO();
         Account account = dao.selectByNumber(number);
-        if (account == null){
-            System.out.println(number+"로 조회된 값이 없습니다.");
+        if (account==null){
+            System.out.println(number+"is unknown");
         }else {
             System.out.println(account);
-//            System.out.println(account.getNumber());
-//            System.out.println(account.getPassword());
-//            System.out.println(account.getBalance());
-//            System.out.println(account.getCreatedAt());
         }
     }
     @Test
