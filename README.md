@@ -1,0 +1,3 @@
+- JDBC - Java DataBase Connection
+- DAO -> crud (Insert, Select, Update, Delete)
+- url -> database connection
