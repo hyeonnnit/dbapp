@@ -61,8 +61,7 @@ public class BankDAO {
             PreparedStatement ptsmt = conn.prepareStatement(sql);
             ptsmt.setInt(1,number);
             ResultSet rs = ptsmt.executeQuery();
-            boolean isRow = rs.next();
-            if (isRow){
+            if (rs.next()){
                 Account account = new Account(
                         rs.getInt("number"),
                         rs.getString("password"),
