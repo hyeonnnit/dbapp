@@ -1,13 +1,15 @@
 package model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 
 // DB에 select 한 데이터를 담기 위한 오브젝트
+@ToString
 @Getter
-@Setter
+@AllArgsConstructor
 public class Account {
     private int number;
     private String password;

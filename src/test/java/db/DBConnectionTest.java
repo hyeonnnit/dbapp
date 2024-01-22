@@ -3,8 +3,6 @@ package db;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DBConnectionTest {
     // 리턴타입을 적을 수 없다.

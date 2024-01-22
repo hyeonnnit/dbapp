@@ -1,9 +1,13 @@
 package dao;
 
 import db.DBConnection;
+import model.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 // DAO - Data Access Object
 // SRP - 단일책임의 원칙
@@ -50,10 +54,50 @@ public class BankDAO {
         }
         return -1;
     }
-    public void selectByNumber(){
-
+    public Account selectByNumber(int number){
+        Connection conn = DBConnection.getInstance();
+        try {
+            String sql = "select * from account_tb where number = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,number);
+            ResultSet rs = pstmt.executeQuery();
+            boolean isRow = rs.next(); // 커서 한칸 내리기
+            if (isRow){
+                Account account = new Account(
+                        rs.getInt("number"),
+                        rs.getString("password"),
+                        rs.getInt("balance"),
+                        rs.getTimestamp("created_at")
+                );
+                return account;
+            }
+            // System.out.println(isRow);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
-    public void selectAll(){
+    public List<Account> selectAll(){
+        Connection conn = DBConnection.getInstance();
+        try {
+            String sql = "select * from account_tb order by number desc";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            List<Account> accountList = new ArrayList<>();
 
+            while (rs.next()){
+                Account account = new Account(
+                        rs.getInt("number"),
+                        rs.getString("password"),
+                        rs.getInt("balance"),
+                        rs.getTimestamp("created_at")
+                );
+                accountList.add(account);
+            }
+            return accountList;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
