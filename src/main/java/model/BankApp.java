@@ -1,23 +1,26 @@
 package model;
 
+import dao.BankDAO;
 import db.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class BankApp {
     public static void main(String[] args) {
-        Connection conn = DBConnection.getInstance();
-        // buffer-Statement // 버퍼 메세지
-        try {
-            PreparedStatement pstmt = conn.prepareStatement("insert into account_tb(password, balance, created_at) values(?,?,now())");
-            pstmt.setString(1,"1234"); // 1부터 시작
-            pstmt.setInt(2,1000);
-            int num = pstmt.executeUpdate(); // flush
-            System.out.println(num);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        Scanner sc = new Scanner(System.in);
+        System.out.print("삭제할 계좌번호를 입력해주세요: ");
+        int number = sc.nextInt();
+        BankDAO dao = new BankDAO();
+        int result = dao.deleteByNumber(number);
+        if (result ==1){
+            System.out.println("삭제 성공");
+        }else {
+            System.out.println("삭제 실패");
         }
+
     }
 }
+
